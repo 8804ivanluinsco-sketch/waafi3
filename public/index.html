@@ -1,0 +1,762 @@
+
+<!doctype html>
+<html lang="so">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="theme-color" content="#7bbf2e"/>
+<title>Amaahda Waafi</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --green:#7bbf2e;
+  --green-2:#91cc42;
+  --green-3:#a8d95a;
+  --green-dark:#5a9020;
+  --green-light:#f2f9e6;
+  --green-mid:#e3f4c0;
+  --green-soft:#f8fdf0;
+  --text:#111827;
+  --text-2:#374151;
+  --text-3:#6b7280;
+  --text-4:#9ca3af;
+  --border:#e5e7eb;
+  --border-green:rgba(123,191,46,.28);
+  --white:#ffffff;
+  --font:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+  --radius-md:14px;
+  --radius-lg:18px;
+  --radius-xl:26px;
+}
+
+html,body{
+  width:100%;height:100%;height:100dvh;
+  overflow:hidden;overflow-x:hidden;
+  font-family:var(--font);
+  background:#f8fdf0;
+}
+
+.screen{
+  display:flex;flex-direction:column;
+  width:100%;height:100%;height:100dvh;
+  max-width:430px;margin:0 auto;
+  background:#f8fdf0;
+  overflow:hidden;overflow-x:hidden;
+  position:relative;
+}
+
+/* ── WHITE LOGO BAR ── */
+.header-bar{
+  background:white;
+  padding:10px 20px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  flex-shrink:0;
+  border-bottom:1px solid #e8f5d8;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  position:relative;z-index:2;
+}
+
+.brand-logos{display:flex;align-items:center;gap:10px}
+
+.brand-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+}
+
+/* logos direct — no pill needed on white */
+.brand-logo-waafi{height:84px;object-fit:contain;display:block}
+.brand-logo-salaam{height:63px;object-fit:contain;display:block}
+
+.brand-sep{
+  width:1.5px;height:50px;
+  background:#d1e8b0;flex-shrink:0;
+}
+
+.header-chip{
+  background:linear-gradient(135deg,#93cc3a,#66a020);
+  border:none;
+  padding:6px 14px;border-radius:999px;
+  font-size:11px;font-weight:700;color:white;
+  letter-spacing:.3px;flex-shrink:0;white-space:nowrap;
+  box-shadow:0 2px 8px rgba(123,191,46,.3);
+}
+
+/* ── HEADER (green section) ── */
+.header{
+  background:linear-gradient(160deg,#93cc3a 0%,#7bbf2e 45%,#5a9020 100%);
+  padding:16px 20px 22px;
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+
+.header::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:44px 44px;pointer-events:none;
+}
+
+.hglow-a{
+  position:absolute;width:260px;height:260px;border-radius:50%;
+  background:rgba(255,255,255,.12);filter:blur(55px);
+  top:-100px;right:-70px;pointer-events:none;
+}
+.hglow-b{
+  position:absolute;width:180px;height:180px;border-radius:50%;
+  background:rgba(50,80,10,.2);filter:blur(45px);
+  bottom:-60px;left:-30px;pointer-events:none;
+}
+
+.brand-sub{
+  font-size:13px;font-weight:800;
+  color:var(--green-dark);letter-spacing:.2px;
+}
+
+/* HERO */
+.header-hero{position:relative;z-index:1;margin-bottom:14px}
+.header-eyebrow{
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.65);
+  text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px;
+}
+.header-title{
+  font-size:26px;font-weight:900;color:white;line-height:1.05;letter-spacing:-.7px;
+}
+.header-title span{
+  color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.5);
+}
+
+/* LOAN DISPLAY */
+.loan-display{position:relative;z-index:1}
+.loan-label{
+  font-size:11px;color:rgba(255,255,255,.7);
+  font-weight:600;margin-bottom:4px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.loan-row{display:flex;align-items:flex-end;gap:5px;margin-bottom:10px}
+.loan-currency{font-size:16px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:4px}
+.loan-amount{
+  font-size:44px;font-weight:800;color:white;line-height:1;
+  font-family:var(--mono);font-variant-numeric:tabular-nums;
+}
+.loan-tag{
+  margin-bottom:4px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  padding:3px 8px;border-radius:6px;
+  font-size:10px;color:white;font-weight:700;letter-spacing:.4px;
+}
+.mini-stats{display:flex;gap:14px}
+.mini-stat{flex:1}
+.mini-stat-label{
+  font-size:9px;font-weight:700;color:rgba(255,255,255,.6);
+  margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px;
+}
+.mini-stat-val{
+  font-size:13px;font-weight:700;
+  color:white;font-family:var(--mono);
+}
+
+/* ── BODY ── */
+.content-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;min-height:0}
+.body{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding:14px 14px 96px;
+  overscroll-behavior:contain;min-height:0;
+}
+.body::-webkit-scrollbar{display:none}
+
+/* ── CARD ── */
+.card{
+  background:linear-gradient(160deg,#ffffff 0%,#f6fce8 100%);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;margin-bottom:10px;
+  box-shadow:0 2px 10px rgba(123,191,46,.1);
+}
+.card-accent{height:3px;width:100%;background:linear-gradient(90deg,#93cc3a,#7bbf2e,#a8d95a)}
+.card-header{
+  padding:13px 16px 11px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-title{font-size:14px;font-weight:700;color:var(--text)}
+.card-sub{font-size:11px;color:var(--text-3);font-weight:500;margin-top:2px}
+.card-badge{
+  background:var(--green-light);color:var(--green-dark);
+  font-size:10px;font-weight:800;
+  padding:4px 10px;border-radius:999px;
+  text-transform:uppercase;letter-spacing:.4px;
+}
+.card-body{padding:14px 16px}
+
+/* ── FIELD ── */
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field-label{
+  font-size:11px;font-weight:700;
+  color:var(--text-2);
+  text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px;
+}
+
+/* SLIDER ROWS */
+.slider-head{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;
+}
+.slider-name{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:700;color:var(--text);
+}
+.slider-emoji{font-size:15px}
+.slider-val{
+  font-family:var(--mono);font-size:14px;font-weight:700;
+  color:var(--green-dark);
+  background:var(--green-light);
+  padding:2px 10px;border-radius:999px;font-size:12px;
+}
+input[type=range]{
+  width:100%;height:7px;border-radius:999px;
+  appearance:none;outline:none;cursor:pointer;
+  background:#e5e7eb;transition:background .15s;
+}
+input[type=range]::-webkit-slider-thumb{
+  appearance:none;width:22px;height:22px;border-radius:50%;
+  background:white;border:2.5px solid #66A228;
+  cursor:grab;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .1s;
+}
+input[type=range]:active::-webkit-slider-thumb{cursor:grabbing;transform:scale(1.15)}
+.slider-hint{
+  display:flex;justify-content:space-between;
+  font-size:9px;color:var(--text-4);font-weight:600;margin-top:4px;
+}
+
+/* INPUTS */
+.input-field{
+  width:100%;height:48px;padding:0 14px;
+  border-radius:var(--radius-md);
+  border:1.5px solid var(--border);
+  background:var(--green-soft);
+  font-family:var(--font);font-size:14px;font-weight:500;
+  color:var(--text);outline:none;
+  transition:border-color .18s,box-shadow .18s;-webkit-appearance:none;
+}
+.input-field::placeholder{color:var(--text-4)}
+.input-field:focus{
+  border-color:#7bbf2e;
+  box-shadow:0 0 0 4px rgba(123,191,46,.1);
+  background:white;
+}
+
+/* DATE */
+input[type=date]{
+  width:100%;height:48px;padding:0 14px;
+  border-radius:var(--radius-md);
+  border:1.5px solid var(--border);
+  background:var(--green-soft);
+  font-family:var(--mono);font-size:14px;font-weight:500;
+  color:var(--text);outline:none;
+  transition:border-color .18s,box-shadow .18s;-webkit-appearance:none;
+}
+input[type=date]:focus{
+  border-color:#7bbf2e;
+  box-shadow:0 0 0 4px rgba(123,191,46,.1);
+  background:white;
+}
+
+/* SELECT */
+.select-wrap{position:relative}
+.select-wrap::after{
+  content:'▾';position:absolute;right:14px;top:50%;
+  transform:translateY(-50%);color:var(--text-3);
+  font-size:14px;pointer-events:none;
+}
+select{
+  width:100%;height:48px;padding:0 36px 0 14px;
+  border-radius:var(--radius-md);
+  border:1.5px solid var(--border);
+  background:var(--green-soft);
+  font-family:var(--font);font-size:14px;font-weight:500;
+  color:var(--text);outline:none;
+  -webkit-appearance:none;appearance:none;
+  transition:border-color .18s,box-shadow .18s;
+}
+select:focus{border-color:#7bbf2e;box-shadow:0 0 0 4px rgba(123,191,46,.1)}
+select option{background:white;color:var(--text)}
+
+/* TWO COL */
+.two-col{display:flex;gap:10px}
+.two-col .field{flex:1}
+
+/* PHONE ROW */
+.phone-row{display:flex;gap:8px}
+.phone-prefix{
+  background:var(--green-light);color:var(--green-dark);
+  font-size:13px;font-weight:800;font-family:var(--mono);
+  padding:0 12px;border-radius:var(--radius-md);
+  border:1.5px solid var(--border-green);
+  display:flex;align-items:center;flex-shrink:0;height:48px;
+}
+
+/* HINTS */
+.field-hint{font-size:11px;color:var(--text-4);font-weight:500;margin-top:5px}
+.field-error{font-size:11px;color:#dc2626;font-weight:600;margin-top:5px;display:none}
+
+/* PAYMENT PREVIEW */
+.payment-preview{
+  background:var(--green-light);
+  border:1px solid var(--border-green);
+  border-radius:var(--radius-md);
+  padding:14px;margin-top:14px;
+}
+.payment-row{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;
+}
+.payment-row:last-child{margin-bottom:0}
+.payment-key{font-size:12px;color:var(--text-3);font-weight:500}
+.payment-val{font-size:13px;font-weight:700;color:var(--text);font-family:var(--mono)}
+.payment-total{
+  padding-top:10px;margin-top:10px;
+  border-top:1px solid var(--border-green);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.payment-total-label{font-size:13px;font-weight:700;color:var(--green-dark)}
+.payment-total-val{font-size:22px;font-weight:800;color:#66A228;font-family:var(--mono)}
+
+/* POWERED BY */
+.powered{
+  text-align:center;padding:6px 0 2px;
+  font-size:10px;color:var(--text-4);font-weight:500;letter-spacing:.3px;
+}
+.powered strong{color:var(--text-3);font-weight:700}
+
+/* ── FOOTER ── */
+.sticky-footer{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:12px 14px max(20px,env(safe-area-inset-bottom));
+  background:linear-gradient(to top,#f8fdf0 72%,transparent);z-index:10;
+}
+.pay-btn{
+  background:linear-gradient(135deg,#93cc3a 0%,#7bbf2e 55%,#5a9020 100%);
+  color:white;border:none;width:100%;padding:16px;
+  border-radius:var(--radius-md);
+  font-family:var(--font);font-size:15px;font-weight:800;
+  cursor:pointer;letter-spacing:-.1px;transition:all .15s;
+  box-shadow:0 4px 18px rgba(123,191,46,.35);
+}
+.pay-btn:active{transform:scale(.98);filter:brightness(.92)}
+
+/* ── MODAL SHEET ── */
+.modal-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.45);
+  display:none;align-items:flex-end;justify-content:center;z-index:100;
+}
+.modal-overlay.open{display:flex}
+.modal-sheet{
+  background:white;width:100%;
+  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+  padding:0 0 32px;animation:slideUp .22s ease;overflow:hidden;
+}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.sheet-handle{width:36px;height:4px;background:#e5e7eb;border-radius:2px;margin:12px auto 0}
+.sheet-header{
+  padding:16px 20px 14px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sheet-title{font-size:17px;font-weight:800;color:var(--text)}
+.sheet-close{
+  width:28px;height:28px;border-radius:50%;background:#f3f4f6;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;cursor:pointer;color:var(--text-3);border:none;
+}
+.sheet-body{padding:16px 20px}
+.sheet-sub{font-size:10px;text-transform:uppercase;letter-spacing:.7px;font-weight:700;color:var(--text-4);margin-bottom:10px}
+.sheet-rows{
+  background:#f9fafb;border-radius:var(--radius-md);
+  overflow:hidden;border:1px solid var(--border);margin-bottom:14px;
+}
+.sheet-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 14px;border-bottom:1px solid var(--border);
+}
+.sheet-row:last-child{border-bottom:none}
+.sheet-row-key{font-size:12px;color:var(--text-3);font-weight:500}
+.sheet-row-val{font-size:13px;font-weight:700;color:var(--text)}
+.sheet-total{
+  background:var(--green-light);border-radius:var(--radius-md);
+  padding:14px;display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:18px;border:1px solid var(--border-green);
+}
+.sheet-total-label{font-size:13px;font-weight:700;color:var(--green-dark)}
+.sheet-total-val{font-size:22px;font-weight:800;color:#7bbf2e;font-family:var(--mono)}
+.sheet-actions{display:flex;gap:10px}
+.btn-cancel{
+  flex:1;padding:14px;border-radius:var(--radius-md);
+  border:1.5px solid var(--border);background:transparent;
+  font-family:var(--font);font-size:14px;font-weight:700;
+  color:var(--text-3);cursor:pointer;
+}
+.btn-confirm{
+  flex:2;padding:14px;border-radius:var(--radius-md);
+  border:none;
+  background:linear-gradient(135deg,#93cc3a 0%,#7bbf2e 55%,#5a9020 100%);
+  font-family:var(--font);font-size:14px;font-weight:800;
+  color:white;cursor:pointer;
+  box-shadow:0 4px 12px rgba(123,191,46,.28);
+}
+.btn-confirm:active{filter:brightness(.92);transform:scale(.98)}
+
+/* TOAST */
+.toast{
+  position:absolute;top:16px;left:50%;
+  transform:translateX(-50%) translateY(-8px);
+  background:#111827;color:white;
+  padding:10px 18px;border-radius:999px;
+  font-size:12px;font-weight:700;
+  opacity:0;pointer-events:none;transition:.22s ease;z-index:200;
+  white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.25);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── PAGE TRANSITIONS ── */
+.screen{animation:pgIn .35s ease both}
+@keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.screen.leaving{animation:pgOut .25s ease forwards!important}
+@keyframes pgOut{to{opacity:0;transform:translateY(-8px)}}
+</style>
+</head>
+<body>
+
+<div class="screen">
+
+  <!-- WHITE LOGO BAR -->
+  <div class="header-bar">
+    <div class="brand-logos">
+      <img src="assets/waafi.svg" alt="Waafi" class="brand-logo-waafi">
+      <div class="brand-sep"></div>
+      <img src="assets/salaamlogo.webp" alt="Salaam" class="brand-logo-salaam">
+    </div>
+    <div class="brand-bottom">
+      <div class="brand-sub">Waafi Loans</div>
+      <div class="header-chip">Amaah Degdeg ah</div>
+    </div>
+  </div>
+
+  <!-- GREEN HEADER -->
+  <div class="header">
+    <div class="hglow-a"></div>
+    <div class="hglow-b"></div>
+
+    <div class="header-hero">
+      <div class="header-eyebrow">Maalgelin degdeg ah oo la qabsan karo</div>
+      <div class="header-title">Amaahkaaga, <span>Shuruudahaaga</span></div>
+    </div>
+
+    <div class="loan-display">
+      <div class="loan-label">Xaddiga Amaahda</div>
+      <div class="loan-row">
+        <span class="loan-currency">USD</span>
+        <span class="loan-amount" id="headerAmount">300</span>
+        <span class="loan-tag" id="headerDur">1 BIL</span>
+      </div>
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <div class="mini-stat-label">Bishiiba</div>
+          <div class="mini-stat-val" id="miniMonthly">$0.00</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-label">Muddada</div>
+          <div class="mini-stat-val" id="miniDur">1 bil</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-label">Faa'iidada</div>
+          <div class="mini-stat-val">2.5%/bil</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-wrap">
+  <div class="body">
+
+    <!-- CALCULATOR -->
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-title">Xisaabiyaha Amaahda</div>
+          <div class="card-sub">Jiid si aad u dejiso xaddiga iyo muddada</div>
+        </div>
+        <div class="card-badge">Toos ah</div>
+      </div>
+      <div class="card-body">
+
+        <div class="field">
+          <div class="slider-head">
+            <div class="slider-name"><span class="slider-emoji">💵</span> Xaddiga Amaahda</div>
+            <div class="slider-val" id="amountVal">$300</div>
+          </div>
+          <input type="range" id="amountSlider" min="300" max="12000" step="100" value="300" oninput="recalc()">
+          <div class="slider-hint"><span>$300</span><span>$12,000</span></div>
+        </div>
+
+        <div class="field">
+          <div class="slider-head">
+            <div class="slider-name"><span class="slider-emoji">📅</span> Muddada</div>
+            <div class="slider-val" id="durVal">1 bil</div>
+          </div>
+          <input type="range" id="durSlider" min="1" max="24" step="1" value="1" oninput="recalc()">
+          <div class="slider-hint"><span>1 bil</span><span>24 bilood</span></div>
+        </div>
+
+        <div class="payment-preview">
+          <div class="payment-row">
+            <span class="payment-key">Xaddiga Amaahda</span>
+            <span class="payment-val" id="pLoan">$300.00</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-key">Faa'iidada Wadarta (2.5%/bil)</span>
+            <span class="payment-val" id="pInterest">$7.50</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-key">Wadarta La Celinta</span>
+            <span class="payment-val" id="pTotal">$307.50</span>
+          </div>
+          <div class="payment-total">
+            <span class="payment-total-label">Celinta Bishiiba</span>
+            <span class="payment-total-val" id="pMonthly">$307.50</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LOAN DETAILS -->
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-title">Faahfaahinta Amaahda</div>
+          <div class="card-sub">Ujeedada iyo nooca amaahda</div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class="field">
+          <div class="field-label">Nooca Amaahda</div>
+          <div class="select-wrap">
+            <select id="loanType">
+              <option value="" disabled selected>Dooro nooca amaahda...</option>
+              <option value="Xaalad Degdeg ah">Xaalad Degdeg ah</option>
+              <option value="Kharashka Dugsiga">Kharashka Dugsiga</option>
+              <option value="Ganacsiga">Ganacsiga</option>
+              <option value="Caafimaad">Caafimaad</option>
+              <option value="Hagaajinta Guriga">Hagaajinta Guriga</option>
+              <option value="Beeraha">Beeraha</option>
+              <option value="Kuwo Kale">Kuwo Kale</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Ujeedada Amaahda</div>
+          <input class="input-field" type="text" id="purpose" placeholder="Si kooban u sharax ujeedadaada...">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PERSONAL INFO -->
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-title">Macluumaadka Shakhsiga</div>
+          <div class="card-sub">Xogahaaga codsigan</div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class="two-col">
+          <div class="field">
+            <div class="field-label">Magaca Hore</div>
+            <input class="input-field" type="text" id="firstName" placeholder="Axmed">
+          </div>
+          <div class="field">
+            <div class="field-label">Magaca Dambe</div>
+            <input class="input-field" type="text" id="lastName" placeholder="Xasan">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Taariikhda Dhalashada</div>
+          <input type="date" id="dob">
+          <div class="field-hint">Da'da ugu yar: 20 sano</div>
+          <div class="field-error" id="dobError">Waa inaad ugu yaraan 20 jir tahay si aad u codsato.</div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Lambarka Telefoonka</div>
+          <div class="phone-row">
+            <div class="phone-prefix">+252</div>
+            <input class="input-field" type="tel" id="phone" inputmode="numeric" pattern="[0-9]*" placeholder="9XXXXXXXX">
+          </div>
+          <div class="field-hint">Lambarka 9-nambar ee Waafi</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="powered">
+      Waafi ayaa maamula &middot; <strong>Shuruudaha iyo xaaladaha waxay khusaynaan</strong>
+    </div>
+
+  </div>
+
+  <div class="sticky-footer">
+    <button class="pay-btn" onclick="openSummary()">Dib u eeg &amp; Codso →</button>
+  </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="handleOverlay(event)">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title">Kooban Amaahda</div>
+        <button class="sheet-close" onclick="closeModal()">&#x2715;</button>
+      </div>
+      <div class="sheet-body">
+        <div class="sheet-sub">Codsigaaga</div>
+        <div class="sheet-rows" id="summaryRows"></div>
+        <div class="sheet-total">
+          <div class="sheet-total-label">Celinta Bishiiba</div>
+          <div class="sheet-total-val" id="summaryMonthly">$0.00</div>
+        </div>
+        <div class="sheet-actions">
+          <button class="btn-cancel" onclick="closeModal()">Wax ka badal</button>
+          <button class="btn-confirm" onclick="proceed()">Sii wad →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Fadlan buuxi dhammaan goobaha</div>
+
+</div>
+
+<script>
+const RATE=0.025;
+let loanAmt=300, loanDur=1;
+
+(function(){
+  const d=new Date();d.setFullYear(d.getFullYear()-20);
+  document.getElementById("dob").max=d.toISOString().split("T")[0];
+})();
+
+function fillSlider(el,color){
+  const pct=((el.value-el.min)/(el.max-el.min))*100;
+  el.style.background=`linear-gradient(to right,${color} ${pct}%,#e5e7eb ${pct}%)`;
+}
+
+function recalc(){
+  loanAmt=Number(document.getElementById("amountSlider").value);
+  loanDur=Number(document.getElementById("durSlider").value);
+  fillSlider(document.getElementById("amountSlider"),"#7bbf2e");
+  fillSlider(document.getElementById("durSlider"),"#5a9020");
+  const interest=loanAmt*RATE*loanDur;
+  const total=loanAmt+interest;
+  const monthly=total/loanDur;
+  const dur=loanDur+(loanDur===1?" bil":" bilood");
+  document.getElementById("amountVal").textContent="$"+loanAmt.toLocaleString();
+  document.getElementById("durVal").textContent=dur;
+  document.getElementById("headerAmount").textContent=loanAmt.toLocaleString();
+  document.getElementById("headerDur").textContent=loanDur+" BIL";
+  document.getElementById("miniMonthly").textContent="$"+monthly.toFixed(2);
+  document.getElementById("miniDur").textContent=dur;
+  document.getElementById("pLoan").textContent="$"+loanAmt.toFixed(2);
+  document.getElementById("pInterest").textContent="$"+interest.toFixed(2);
+  document.getElementById("pTotal").textContent="$"+total.toFixed(2);
+  document.getElementById("pMonthly").textContent="$"+monthly.toFixed(2);
+}
+
+document.getElementById("phone").oninput=function(){
+  let v=this.value.replace(/\D/g,"");
+  if(v.startsWith("252")) v=v.slice(3);
+  if(v.startsWith("0")) v=v.slice(1);
+  this.value=v.slice(0,9);
+};
+
+document.getElementById("dob").onchange=function(){
+  const dob=new Date(this.value);
+  const min=new Date();min.setFullYear(min.getFullYear()-20);
+  const err=document.getElementById("dobError");
+  if(dob>min){err.style.display="block";this.style.borderColor="rgba(220,38,38,.6)"}
+  else{err.style.display="none";this.style.borderColor=""}
+};
+
+function validate(){
+  const fn=document.getElementById("firstName").value.trim();
+  const ln=document.getElementById("lastName").value.trim();
+  const ph=document.getElementById("phone").value.trim();
+  const dob=document.getElementById("dob").value;
+  const lt=document.getElementById("loanType").value;
+  const pu=document.getElementById("purpose").value.trim();
+  if(!fn||!ln||!ph||!dob||!lt||!pu){showToast("Fadlan buuxi dhammaan goobaha");return null}
+  if(ph.length!==9){showToast("Telefoonku waa inuu noqdaa 9 nambar");return null}
+  const d=new Date(dob),m=new Date();m.setFullYear(m.getFullYear()-20);
+  if(d>m){showToast("Da'da ugu yar waa 20 sano");return null}
+  const interest=loanAmt*RATE*loanDur;
+  const total=loanAmt+interest;
+  const monthly=(total/loanDur).toFixed(2);
+  return{firstName:fn,lastName:ln,phone:"+252"+ph,dob,loanType:lt,purpose:pu,monthly,totalRepay:total.toFixed(2)};
+}
+
+function openSummary(){
+  const d=validate();if(!d)return;
+  const dur=loanDur+(loanDur===1?" bil":" bilood");
+  document.getElementById("summaryRows").innerHTML=`
+    <div class="sheet-row"><span class="sheet-row-key">Magaca</span><span class="sheet-row-val">${d.firstName} ${d.lastName}</span></div>
+    <div class="sheet-row"><span class="sheet-row-key">Telefoon</span><span class="sheet-row-val">${d.phone}</span></div>
+    <div class="sheet-row"><span class="sheet-row-key">Taariikhda Dhalashada</span><span class="sheet-row-val">${d.dob}</span></div>
+    <div class="sheet-row"><span class="sheet-row-key">Nooca Amaahda</span><span class="sheet-row-val">${d.loanType}</span></div>
+    <div class="sheet-row"><span class="sheet-row-key">Ujeedada</span><span class="sheet-row-val">${d.purpose}</span></div>
+    <div class="sheet-row"><span class="sheet-row-key">Xaddiga</span><span class="sheet-row-val">$${loanAmt.toLocaleString()}</span></div>
+    <div class="sheet-row"><span class="sheet-row-key">Muddada</span><span class="sheet-row-val">${dur}</span></div>
+    <div class="sheet-row"><span class="sheet-row-key">Wadarta La Celinta</span><span class="sheet-row-val">$${d.totalRepay}</span></div>
+  `;
+  document.getElementById("summaryMonthly").textContent="$"+d.monthly;
+  document.getElementById("modal").classList.add("open");
+}
+
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function handleOverlay(e){if(e.target===document.getElementById("modal"))closeModal()}
+
+function proceed(){
+  const d=validate();if(!d)return;
+  sessionStorage.setItem("selectedPlan",JSON.stringify({
+    plan:"Amaahda Waafi",loanType:d.loanType,purpose:d.purpose,
+    loanAmount:loanAmt,duration:loanDur,monthlyRepayment:d.monthly,
+    totalRepayable:d.totalRepay,firstName:d.firstName,
+    lastName:d.lastName,phone:d.phone,dob:d.dob
+  }));
+  closeModal();navigateTo("login.html");
+}
+
+function showToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2400);
+}
+
+recalc();
+
+function navigateTo(url){
+  document.querySelector('.screen').classList.add('leaving');
+  setTimeout(function(){location.href=url;},260);
+}
+</script>
+</body>
+</html>

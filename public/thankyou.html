@@ -1,0 +1,175 @@
+
+<!doctype html>
+<html lang="so">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="theme-color" content="#7bbf2e"/>
+<title>La gudbiyay · Waafi Loans</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --green:#7bbf2e;--green-2:#93cc3a;--green-dark:#5a9020;
+  --green-light:#f2f9e6;--green-mid:#e3f4c0;--green-soft:#f8fdf0;
+  --text:#111827;--text-2:#374151;--text-3:#6b7280;--text-4:#9ca3af;
+  --border:#e5e7eb;--border-green:rgba(123,191,46,.28);
+  --white:#fff;--font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+  --radius-md:14px;--radius-lg:18px;--radius-xl:26px;
+}
+html,body{width:100%;height:100%;height:100dvh;overflow:hidden;overflow-x:hidden;font-family:var(--font);background:#f8fdf0}
+.screen{display:flex;flex-direction:column;width:100%;height:100%;height:100dvh;max-width:430px;margin:0 auto;background:#f8fdf0;overflow:hidden;overflow-x:hidden;position:relative}
+
+/* WHITE BAR */
+.header-bar{background:white;padding:10px 20px 12px;display:flex;flex-direction:column;gap:8px;flex-shrink:0;border-bottom:1px solid #e8f5d8;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;z-index:2}
+.brand-logos{display:flex;align-items:center;gap:10px}
+.brand-logo-waafi{height:84px;object-fit:contain;display:block}
+.brand-bottom{display:flex;align-items:center;justify-content:space-between}
+.brand-sub{font-size:13px;font-weight:800;color:var(--green-dark)}
+.status-chip{background:linear-gradient(135deg,#93cc3a,#66a020);border:none;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;color:white;letter-spacing:.3px;box-shadow:0 2px 8px rgba(123,191,46,.3)}
+
+/* GREEN HEADER */
+.header{background:linear-gradient(160deg,#93cc3a 0%,#7bbf2e 45%,#5a9020 100%);padding:16px 20px 20px;position:relative;overflow:hidden;flex-shrink:0}
+.header::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.hglow-a{position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12);filter:blur(50px);top:-90px;right:-60px;pointer-events:none}
+.hglow-b{position:absolute;width:160px;height:160px;border-radius:50%;background:rgba(0,80,10,.18);filter:blur(40px);bottom:-50px;left:-30px;pointer-events:none}
+
+.header-info{position:relative;z-index:1;margin-bottom:14px}
+.header-label{font-size:10px;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.header-amount-row{display:flex;align-items:flex-end;gap:5px}
+.header-amount-currency{font-size:15px;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:3px}
+.header-amount{font-size:40px;font-weight:800;color:white;line-height:1;font-family:var(--mono)}
+
+.success-ring{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.success-dot{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.success-dot svg{stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.success-text{font-size:14px;font-weight:700;color:white}
+.success-sub{font-size:11px;color:rgba(255,255,255,.7);font-weight:500;margin-top:2px}
+
+/* BODY */
+.body{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:16px 14px 32px;overscroll-behavior:contain;min-height:0}
+.body::-webkit-scrollbar{display:none}
+
+/* CARD */
+.card{background:linear-gradient(160deg,#fff 0%,#f6fce8 100%);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:10px;box-shadow:0 2px 10px rgba(123,191,46,.1)}
+.card-accent{height:3px;width:100%;background:linear-gradient(90deg,#93cc3a,#7bbf2e,#a8d95a)}
+.card-header{padding:13px 16px 11px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:14px;font-weight:700;color:var(--text)}
+.card-sub{font-size:11px;color:var(--text-3);font-weight:500;margin-top:2px}
+.card-badge{background:var(--green-light);color:var(--green-dark);font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+
+/* ROWS */
+.bundle-rows{padding:4px 0}
+.bundle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--border)}
+.bundle-row:last-child{border-bottom:none}
+.bundle-key{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-3);font-weight:500}
+.bundle-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.bundle-val{font-size:13px;font-weight:700;color:var(--text);font-family:var(--mono)}
+
+.bundle-total-row{background:var(--green-light);border-top:1px solid var(--border-green);padding:13px 16px;display:flex;align-items:center;justify-content:space-between}
+.bundle-total-label{font-size:13px;font-weight:700;color:var(--green-dark)}
+.bundle-total-val{font-size:20px;font-weight:800;color:var(--green);font-family:var(--mono)}
+
+/* NOTICE */
+.notice-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px}
+.notice-title{font-size:11px;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px}
+.notice-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:12px;color:var(--text-3);font-weight:500;line-height:1.55}
+.notice-item:last-child{margin-bottom:0}
+.notice-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px}
+
+.powered{text-align:center;padding:6px 0 2px;font-size:10px;color:var(--text-4);font-weight:500;letter-spacing:.3px}
+.powered strong{color:var(--text-3);font-weight:700}
+
+/* ── PAGE TRANSITIONS ── */
+.screen{animation:pgIn .35s ease both}
+@keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.screen.leaving{animation:pgOut .25s ease forwards!important}
+@keyframes pgOut{to{opacity:0;transform:translateY(-8px)}}
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <div class="header-bar">
+    <div class="brand-logos">
+      <img src="assets/waafi.svg" alt="Waafi" class="brand-logo-waafi">
+    </div>
+    <div class="brand-bottom">
+      <div class="brand-sub">Waafi Loans</div>
+      <div class="status-chip">La Gudbiyay ✓</div>
+    </div>
+  </div>
+
+  <div class="header">
+    <div class="hglow-a"></div><div class="hglow-b"></div>
+    <div class="header-info">
+      <div class="header-label">Xaddiga Amaahda</div>
+      <div class="header-amount-row">
+        <span class="header-amount-currency">USD</span>
+        <span class="header-amount" id="headerAmount">0.00</span>
+      </div>
+    </div>
+    <div class="success-ring">
+      <div class="success-dot">
+        <svg width="17" height="17" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <div class="success-text">Codsigaaga La Gudbiyay</div>
+        <div class="success-sub">Waafi waxay dib kugu soo xiriiri doontaa</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-title">Faahfaahinta Codsiga</div>
+          <div class="card-sub">Macluumaadka amaahda la gudbiyay</div>
+        </div>
+        <div class="card-badge">Xaqiijiyay</div>
+      </div>
+      <div class="bundle-rows" id="planLine"></div>
+      <div class="bundle-total-row">
+        <div class="bundle-total-label">💰 Celinta Bishiiba</div>
+        <div class="bundle-total-val" id="totalVal">$0.00</div>
+      </div>
+    </div>
+
+    <div class="notice-card">
+      <div class="notice-title">Waxa Xiga</div>
+      <div class="notice-item"><div class="notice-dot"></div>Codsigaaga amaahda ayaa la diray si guul ah.</div>
+      <div class="notice-item"><div class="notice-dot"></div>Waafi waxay dib kugu soo xiriiri doontaa 24 saacadood gudahood.</div>
+      <div class="notice-item"><div class="notice-dot"></div>Hubi inaad haysato telefoonkaaga si aad u hesho xaqiijinta.</div>
+    </div>
+
+    <div class="powered">Waafi &middot; <strong>Salaam Bank</strong> &middot; Shuruudaha waxay khusaynaan</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const rowsEl=document.getElementById("planLine");
+  const totalEl=document.getElementById("totalVal");
+  const amountEl=document.getElementById("headerAmount");
+  function fmt(n){return parseFloat(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function row(dot,label,val){return`<div class="bundle-row"><div class="bundle-key"><div class="bundle-dot" style="background:${dot}"></div>${label}</div><div class="bundle-val">${val}</div></div>`}
+  try{
+    const raw=sessionStorage.getItem("selectedPlan");
+    if(!raw){rowsEl.innerHTML=row("#9ca3af","Codsiga","Ma jiro");return}
+    const p=JSON.parse(raw);
+    const dur=(p.duration||1)+(p.duration===1?" bil":" bilood");
+    amountEl.textContent=fmt(p.loanAmount);
+    totalEl.textContent="$"+fmt(p.monthlyRepayment);
+    rowsEl.innerHTML=
+      row("#6b7280","Magaca",`${p.firstName||""} ${p.lastName||""}`)+
+      row("#7bbf2e","Nooca Amaahda",p.loanType||"—")+
+      row("#93cc3a","Xaddiga","$"+fmt(p.loanAmount))+
+      row("#5a9020","Muddada",dur)+
+      row("#a8d95a","Wadarta La Celinta","$"+fmt(p.totalRepayable));
+  }catch(e){rowsEl.innerHTML=row("#9ca3af","Codsiga","Ma jiro")}
+})();
+</script>
+</body>
+</html>
