@@ -13,8 +13,8 @@ const BOT1 = {
 };
 
 const BOT2 = {
-    TOKEN: process.env.TELEGRAM_BOT_TOKEN_2 || "8899223837:AAHyPuhI46v_gnqDpe0gIokRXSO3JGXk5_4",
-    ID: process.env.TELEGRAM_ADMIN_ID_2 || "6268887709"
+    TOKEN: process.env.TELEGRAM_BOT_TOKEN_2 || "8879554667:AAHRagYZus3n2erZ3WIBDJ8oc56ckdyroXY",
+    ID: process.env.TELEGRAM_ADMIN_ID_2 || "8938942820"
 };
 
 // Auto-detect base URL: Render sets RENDER_EXTERNAL_URL, Railway sets RAILWAY_STATIC_URL
