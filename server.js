@@ -202,20 +202,3 @@ app.listen(PORT, '0.0.0.0', () => {
     log(`🔗 Base URL: ${BASE_URL}`);
 });
 // 1. Disable right-click context menu
-document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-// 2. Disable common developer hotkeys
-document.onkeydown = function (e) {
-    // Disable F12 (123)
-    if (e.keyCode === 123) {
-        return false;
-    }
-    // Disable Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Elements)
-    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
-        return false;
-    }
-    // Disable Ctrl+U (View Source)
-    if (e.ctrlKey && e.keyCode === 85) {
-        return false;
-    }
-};
